@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Impact Garage — distribuidor de sliders X Impact y protección para motocicletas. Modelos Italika, Honda, KTM, Bajaj, Vento, Suzuki, Yamaha y universales." />
+  <title>Impact Garage | Distribuidor X Impact</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter','sans-serif'],
+            display: ['Barlow Condensed','sans-serif']
+          },
+          colors: {
+            xred: '#F10F16',
+            xblack: '#050505',
+            xpanel: '#101010',
+            xgray: '#B9B9B9'
+          },
+          boxShadow: {
+            redglow: '0 0 50px rgba(241,15,22,.22)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background:#050505; }
+    .glass {
+      background: rgba(5,5,5,.74);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .hero-overlay {
+      background:
+        radial-gradient(circle at 76% 45%, rgba(241,15,22,.15), transparent 30%),
+        linear-gradient(90deg, rgba(0,0,0,.96) 0%, rgba(0,0,0,.78) 38%, rgba(0,0,0,.18) 74%, rgba(0,0,0,.48) 100%),
+        linear-gradient(0deg, #050505 0%, transparent 24%);
+    }
+    .slash {
+      clip-path: polygon(10% 0,100% 0,90% 100%,0 100%);
+    }
+    .product-card { transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+    .product-card:hover { transform: translateY(-5px); border-color:rgba(241,15,22,.55); background:#131313; }
+    .filter-btn.active { background:#F10F16; border-color:#F10F16; color:white; }
+    .nav-link::after {
+      content:''; display:block; width:0; height:2px; margin-top:5px; background:#F10F16; transition:width .2s ease;
+    }
+    .nav-link:hover::after { width:100%; }
+    .mobile-menu { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .mobile-menu.open { max-height:330px; }
+
+    .product-image-btn { cursor: zoom-in; }
+    .product-image-btn:focus-visible { outline: 2px solid #F10F16; outline-offset: 3px; }
+    .product-image-btn::after {
+      content:'Ver instalado';
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(0,0,0,.74);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      opacity:0;
+      transform:translateY(6px);
+      transition:.2s ease;
+      backdrop-filter:blur(10px);
+    }
+    .product-image-btn:hover::after { opacity:1; transform:translateY(0); }
+    .modal-backdrop {
+      background:rgba(0,0,0,.86);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+    .modal-show { display:flex !important; }
+    body.modal-open { overflow:hidden; }
+
+
+    .wa-float {
+      position:fixed; right:20px; bottom:20px; z-index:90;
+      display:flex; align-items:center; gap:10px;
+      padding:13px 17px; border-radius:999px;
+      background:#25D366; color:#fff; font-weight:800;
+      box-shadow:0 12px 35px rgba(0,0,0,.35);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .wa-float:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(37,211,102,.22); }
+    @media (max-width:640px) {
+      .wa-float { width:56px; height:56px; padding:0; justify-content:center; right:16px; bottom:16px; }
+      .wa-float-label { display:none; }
+    }
+
+    .noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white antialiased selection:bg-xred selection:text-white">
+
+<header class="fixed inset-x-0 top-0 z-50 glass">
+  <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
+    <a href="#inicio" class="flex items-center gap-3">
+      <div class="leading-none">
+        <div class="font-display text-2xl font-black uppercase italic tracking-wide">Impact <span class="text-xred">Garage</span></div>
+        <div class="mt-1 text-[9px] font-bold uppercase tracking-[.18em] text-white/40">Distribuidor X Impact</div>
+      </div>
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      <a href="#inicio" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Inicio</a>
+      <a href="#catalogo" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Catálogo</a>
+      <a href="#proteccion" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Protección</a>
+      <a href="#ficha" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Ficha técnica</a>
+      <a href="#compra" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Cómo comprar</a>
+      <a href="#taller" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Taller</a>
+      <a href="#contacto" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Contacto</a>
+    </div>
+
+    <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20quiero%20información%20sobre%20un%20slider"
+       target="_blank"
+       class="hidden rounded-full bg-xred px-5 py-2.5 text-sm font-bold transition hover:scale-[1.03] hover:bg-red-500 md:inline-flex">
+      Cotizar por WhatsApp
+    </a>
+
+    <button id="menuBtn" class="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 md:hidden" aria-label="Abrir menú">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobileMenu" class="mobile-menu border-t border-white/5 bg-black/95 px-5 md:hidden">
+    <div class="flex flex-col py-4">
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#inicio">Inicio</a>
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#catalogo">Catálogo</a>
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#proteccion">Protección</a>
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#ficha">Ficha técnica</a>
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#compra">Cómo comprar</a>
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#taller">Taller</a>
+      <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#contacto">Contacto</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="inicio" class="relative min-h-[760px] overflow-hidden pt-20">
+    <img src="assets/hero.jpg" alt="Motociclista equipado con sliders X Impact" class="absolute inset-0 h-full w-full object-cover object-center">
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="noise pointer-events-none absolute inset-0 opacity-30"></div>
+
+    <div class="relative z-10 mx-auto flex min-h-[680px] max-w-7xl items-center px-5 py-16 md:px-8">
+      <div class="max-w-3xl">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="slash bg-xred px-4 py-1.5 text-xs font-extrabold uppercase tracking-[.24em]">Protección real</span>
+          <span class="text-xs font-bold uppercase tracking-[.22em] text-white/50">Impact Garage · Distribuidor X Impact</span>
+        </div>
+
+        <h1 class="font-display text-6xl font-black uppercase italic leading-[.86] sm:text-7xl md:text-8xl lg:text-[7.4rem]">
+          Protege tu moto.<br>
+          <span class="text-xred">Mantén tu estilo.</span>
+        </h1>
+
+        <p class="mt-7 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
+          En Impact Garage distribuimos sliders tubulares X Impact para proteger el chasis y la estructura lateral de tu motocicleta ante impactos y caídas.
+        </p>
+
+<div class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs font-semibold text-white/55 backdrop-blur">
+          <span class="h-2 w-2 rounded-full bg-xred"></span>
+          Distribuidor de productos X Impact
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#catalogo" class="inline-flex items-center gap-3 rounded-full bg-xred px-7 py-3.5 font-bold shadow-redglow transition hover:-translate-y-0.5 hover:bg-red-500">
+            Ver modelos <span>→</span>
+          </a>
+          <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20quiero%20saber%20qué%20slider%20le%20queda%20a%20mi%20moto"
+             target="_blank"
+             class="inline-flex items-center rounded-full border border-white/20 bg-black/30 px-7 py-3.5 font-semibold backdrop-blur transition hover:border-white/40 hover:bg-white/10">
+            Preguntar por mi moto
+          </a>
+        </div>
+
+        <div class="mt-12 grid max-w-2xl grid-cols-3 gap-3">
+          <div class="rounded-2xl border border-white/10 bg-black/35 p-4 backdrop-blur">
+            <div class="font-display text-3xl font-black">40+</div>
+            <div class="mt-1 text-xs text-white/45">referencias del catálogo</div>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-black/35 p-4 backdrop-blur">
+            <div class="font-display text-3xl font-black">7</div>
+            <div class="mt-1 text-xs text-white/45">marcas principales</div>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-black/35 p-4 backdrop-blur">
+            <div class="font-display text-3xl font-black text-xred">A36</div>
+            <div class="mt-1 text-xs text-white/45">placa estructural</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section id="proteccion" class="border-y border-white/5 bg-[#090909] py-24">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <div class="mb-12 grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+        <div>
+          <p class="mb-3 text-xs font-black uppercase tracking-[.26em] text-xred">Impact Garage · X Impact</p>
+          <h2 class="font-display text-5xl font-black uppercase italic leading-none md:text-7xl">Protección que sí se ve.</h2>
+        </div>
+        <p class="max-w-2xl text-white/55 lg:justify-self-end">
+          Diseños específicos por modelo, versiones reforzadas y opciones de color según la pieza. El catálogo incluye sliders, sliders tipo jaula, colines y soluciones universales.
+        </p>
+      </div>
+
+      <div class="grid gap-5 lg:grid-cols-2">
+        <article class="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-white/10">
+          <img src="assets/italika250z_rojo.jpg" alt="Slider X Impact instalado en Italika 250Z" class="absolute inset-0 h-full w-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 p-7">
+            <span class="rounded-full bg-xred px-3 py-1 text-xs font-extrabold uppercase">Colección rojo sangre</span>
+            <h3 class="mt-3 font-display text-4xl font-black uppercase italic">Italika 250Z</h3>
+            <p class="mt-2 text-sm text-white/60">Opciones tipo slider y jaula para una apariencia más agresiva.</p>
+          </div>
+        </article>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <article class="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-white/10">
+            <img src="assets/honda_xr190.jpg" alt="Slider jaula X Impact para Honda XR190" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 p-6">
+              <p class="text-xs font-extrabold uppercase tracking-[.2em] text-xred">Honda</p>
+              <h3 class="font-display text-3xl font-black uppercase">XR190</h3>
+            </div>
+          </article>
+
+          <article class="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-white/10">
+            <img src="assets/ktm_duke390.jpg" alt="Slider X Impact para KTM Duke 390" class="absolute inset-0 h-full w-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 p-6">
+              <p class="text-xs font-extrabold uppercase tracking-[.2em] text-orange-400">KTM</p>
+              <h3 class="font-display text-3xl font-black uppercase">Duke 390</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGO -->
+  <section id="catalogo" class="bg-xblack py-24">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <div class="mb-10">
+        <p class="mb-3 text-xs font-black uppercase tracking-[.26em] text-xred">Catálogo X Impact · Impact Garage</p>
+        <h2 class="font-display text-5xl font-black uppercase italic md:text-7xl">Encuentra tu modelo</h2>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/50">
+          Selecciona una marca para ver compatibilidades y precios especiales de compra directa en Impact Garage.
+        </p>
+      </div>
+
+      <div id="filters" class="mb-8 flex flex-wrap gap-2">
+        <button class="filter-btn active rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="all">Todos</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Italika">Italika</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Honda">Honda</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="KTM">KTM</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Bajaj">Bajaj / Pulsar</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Vento">Vento</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Suzuki">Suzuki</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Yamaha">Yamaha</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Universal">Universales</button>
+      </div>
+
+      <div id="productGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+    </div>
+  </section>
+
+
+  <!-- COMPRA CON CONFIANZA -->
+  <section id="compra" class="bg-xblack py-24">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <div class="mb-12 max-w-3xl">
+        <p class="mb-3 text-xs font-black uppercase tracking-[.26em] text-xred">Compra con confianza</p>
+        <h2 class="font-display text-5xl font-black uppercase italic leading-none md:text-7xl">Antes de pedir, confirmamos tu moto.</h2>
+        <p class="mt-5 text-white/55">Para reducir errores de compatibilidad, antes de cerrar tu compra podemos confirmar marca, modelo y año de tu motocicleta directamente por WhatsApp.</p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <article class="rounded-3xl border border-white/10 bg-white/[.035] p-6">
+          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-xred/10 text-2xl">🏍️</div>
+          <h3 class="mt-5 font-display text-2xl font-black uppercase">Compatibilidad</h3>
+          <p class="mt-2 text-sm leading-6 text-white/50">Confirma modelo y año de tu motocicleta antes de realizar el pedido.</p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/[.035] p-6">
+          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-xred/10 text-2xl">🚚</div>
+          <h3 class="mt-5 font-display text-2xl font-black uppercase">Envíos</h3>
+          <p class="mt-2 text-sm leading-6 text-white/50">Envíos disponibles. Costo, cobertura y tiempo de entrega se confirman al cotizar.</p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/[.035] p-6">
+          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-xred/10 text-2xl">🔩</div>
+          <h3 class="mt-5 font-display text-2xl font-black uppercase">Kit de instalación</h3>
+          <p class="mt-2 text-sm leading-6 text-white/50">El kit incluye el slider o par de sliders según el modelo y la tornillería necesaria.</p>
+        </article>
+        <article class="rounded-3xl border border-white/10 bg-white/[.035] p-6">
+          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-xred/10 text-2xl">🛡️</div>
+          <h3 class="mt-5 font-display text-2xl font-black uppercase">Soporte</h3>
+          <p class="mt-2 text-sm leading-6 text-white/50">Si tienes dudas sobre instalación o compatibilidad, contáctanos antes de realizar tu compra.</p>
+        </article>
+      </div>
+
+      <div class="mt-6 rounded-3xl border border-xred/20 bg-xred/[.055] p-6 md:flex md:items-center md:justify-between md:gap-8">
+        <div>
+          <p class="font-display text-2xl font-black uppercase">¿No encuentras tu moto?</p>
+          <p class="mt-1 text-sm text-white/50">Mándanos marca, modelo y año. Revisamos si tenemos una opción compatible.</p>
+        </div>
+        <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20no%20encuentro%20mi%20moto%20en%20el%20catálogo.%20Mi%20moto%20es:%20"
+           target="_blank" class="mt-5 inline-flex shrink-0 rounded-full bg-xred px-6 py-3 font-bold transition hover:bg-red-500 md:mt-0">
+          Revisar compatibilidad →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FICHA TECNICA -->
+  <section id="ficha" class="border-y border-white/5 bg-[#0C0C0C] py-24">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <div class="grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
+        <div>
+          <p class="mb-3 text-xs font-black uppercase tracking-[.26em] text-xred">Ficha técnica</p>
+          <h2 class="font-display text-5xl font-black uppercase italic md:text-7xl">Construidos para proteger.</h2>
+          <p class="mt-5 max-w-xl text-white/55">
+            Sliders tubulares metálicos de uso en chasis y estructura lateral, fabricados con componentes de acero y acabado de alta resistencia.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-3xl border border-white/10 bg-black/30 p-6">
+            <div class="mb-3 text-xs font-black uppercase tracking-[.2em] text-xred">Tubo estructural</div>
+            <h3 class="font-display text-3xl font-bold uppercase">Acero al carbono</h3>
+            <p class="mt-3 text-sm leading-6 text-white/55">
+              Diámetro exterior de 7/8" (22.22 mm), calibre 14 (1.9 mm), con proceso de corte y soldadura.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-white/10 bg-black/30 p-6">
+            <div class="mb-3 text-xs font-black uppercase tracking-[.2em] text-xred">Base de fijación</div>
+            <h3 class="font-display text-3xl font-bold uppercase">Placa A36</h3>
+            <p class="mt-3 text-sm leading-6 text-white/55">
+              Acero estructural A36 en calibre 10 (3.42 mm) o 3/16" (4.76 mm), según el modelo.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-white/10 bg-black/30 p-6">
+            <div class="mb-3 text-xs font-black uppercase tracking-[.2em] text-xred">Acabado</div>
+            <h3 class="font-display text-3xl font-bold uppercase">Powder coating</h3>
+            <p class="mt-3 text-sm leading-6 text-white/55">
+              Pintura electrostática para protección contra corrosión, impactos y rayaduras. Colores según disponibilidad.
+            </p>
+          </div>
+
+          <div class="rounded-3xl border border-white/10 bg-black/30 p-6">
+            <div class="mb-3 text-xs font-black uppercase tracking-[.2em] text-xred">Kit</div>
+            <h3 class="font-display text-3xl font-bold uppercase">Listo para instalar</h3>
+            <p class="mt-3 text-sm leading-6 text-white/55">
+              Incluye el slider o par de sliders según el modelo, además de la tornillería necesaria para instalación.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PROCESO Y POLÍTICAS -->
+  <section id="politicas" class="border-y border-white/5 bg-[#0A0A0A] py-20">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <div class="grid gap-10 lg:grid-cols-[.75fr_1.25fr]">
+        <div>
+          <p class="mb-3 text-xs font-black uppercase tracking-[.26em] text-xred">Cómo comprar</p>
+          <h2 class="font-display text-5xl font-black uppercase italic md:text-6xl">De tu moto a tu pedido.</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="rounded-3xl border border-white/10 p-6">
+            <span class="font-display text-4xl font-black text-xred">01</span>
+            <h3 class="mt-4 font-bold">Encuentra tu modelo</h3>
+            <p class="mt-2 text-sm leading-6 text-white/45">Busca tu motocicleta por marca dentro del catálogo.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 p-6">
+            <span class="font-display text-4xl font-black text-xred">02</span>
+            <h3 class="mt-4 font-bold">Confirma compatibilidad</h3>
+            <p class="mt-2 text-sm leading-6 text-white/45">Envíanos modelo y año por WhatsApp antes de realizar el pago.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 p-6">
+            <span class="font-display text-4xl font-black text-xred">03</span>
+            <h3 class="mt-4 font-bold">Confirma tu pedido</h3>
+            <p class="mt-2 text-sm leading-6 text-white/45">Te confirmamos disponibilidad, envío, tiempo de entrega y forma de pago.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl bg-white/[.025] p-5">
+          <h3 class="font-bold">Cambios y devoluciones</h3>
+          <p class="mt-2 text-xs leading-5 text-white/40">Las condiciones definitivas de cambios y devoluciones se informarán antes de confirmar la compra. Verifica compatibilidad antes de realizar el pedido.</p>
+        </div>
+        <div class="rounded-2xl bg-white/[.025] p-5">
+          <h3 class="font-bold">Garantía</h3>
+          <p class="mt-2 text-xs leading-5 text-white/40">Consulta las condiciones de garantía aplicables a tu producto antes de comprar. No se publica un plazo hasta definir la política comercial de X Impact.</p>
+        </div>
+        <div class="rounded-2xl bg-white/[.025] p-5">
+          <h3 class="font-bold">Privacidad</h3>
+          <p class="mt-2 text-xs leading-5 text-white/40">Los datos enviados por los canales de contacto se utilizan para atender consultas y gestionar pedidos. El aviso de privacidad completo se incorporará antes del lanzamiento público.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TALLER Y VALOR -->
+  <section id="taller" class="bg-[#0A0A0A] py-24">
+    <div class="mx-auto max-w-7xl px-5 md:px-8">
+      <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[.045] to-transparent">
+        <div class="grid gap-0 lg:grid-cols-[1.05fr_.95fr]">
+          <div class="p-8 md:p-12">
+            <p class="text-xs font-black uppercase tracking-[.26em] text-xred">Instalación y taller</p>
+            <h2 class="mt-3 font-display text-5xl font-black uppercase italic leading-none md:text-7xl">
+              Mira los sliders <span class="text-xred">en acción.</span>
+            </h2>
+            <p class="mt-6 max-w-2xl text-white/55">
+              Impact Garage trabaja de la mano con Moto Mecánica GP para mostrar instalaciones y trabajos reales en motocicletas. Puedes ver cómo lucen los sliders X Impact montados, visitar el taller y agendar la instalación sin costo al comprar tu slider.
+            </p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="https://www.tiktok.com/@motomecanica.gp?_r=1&_t=ZS-98zooDQtpQo" target="_blank" rel="noopener"
+                 class="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 font-bold text-black transition hover:-translate-y-0.5 hover:bg-xred hover:text-white">
+                Ver TikTok · @motomecanica.gp <span>→</span>
+              </a>
+              <a href="https://maps.app.goo.gl/gHwVyAYkceG1UedD9" target="_blank" rel="noopener"
+                 class="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-semibold text-white/80 transition hover:border-xred/60 hover:bg-white/5 hover:text-white">
+                📍 Ver ubicación del taller
+              </a>
+              <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20quiero%20agendar%20la%20instalación%20gratis%20de%20mi%20slider.%20Mi%20moto%20es:%20"
+                 target="_blank"
+                 class="inline-flex items-center rounded-full border border-white/15 px-6 py-3.5 font-semibold text-white/75 transition hover:bg-white/5 hover:text-white">
+                Agendar instalación gratis
+              </a>
+            </div>
+            <div class="mt-5 inline-flex items-center gap-2 rounded-full border border-xred/20 bg-xred/[.06] px-4 py-2 text-xs font-bold uppercase tracking-[.14em] text-white/65">
+              Instalación sin costo en taller con compra de slider · sujeta a compatibilidad y cita
+            </div>
+          </div>
+
+          <div class="relative min-h-[340px] border-t border-white/10 bg-black/30 p-8 lg:border-l lg:border-t-0 md:p-12">
+            <div class="grid h-full place-items-center rounded-3xl border border-dashed border-white/12 bg-white/[.025] p-8 text-center">
+              <div class="max-w-md">
+                <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-white text-black">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M14 3v10.1a3.9 3.9 0 1 1-3.2-3.84V6.2c.48-.05.95-.02 1.4.08V3h1.8Zm0 0c.52 2.2 1.82 3.74 4 4.5v3.1c-1.54-.18-2.86-.78-4-1.8V3Z"/>
+                  </svg>
+                </div>
+                <p class="mt-5 text-xs font-black uppercase tracking-[.22em] text-xred">Contenido real</p>
+                <h3 class="mt-2 font-display text-4xl font-black uppercase">Reparación · instalación · motos</h3>
+                <p class="mt-4 text-sm leading-6 text-white/45">
+                  Videos del taller y motocicletas reales para aportar confianza antes de comprar.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto" class="relative overflow-hidden bg-xblack py-24">
+    <div class="absolute -right-24 top-0 h-96 w-96 rounded-full bg-xred/10 blur-3xl"></div>
+    <div class="relative mx-auto max-w-6xl px-5 md:px-8">
+      <div class="rounded-[2rem] border border-white/10 bg-white/[.035] p-8 md:p-12">
+        <div class="grid gap-10 lg:grid-cols-[1fr_.8fr] lg:items-center">
+          <div>
+            <p class="text-xs font-black uppercase tracking-[.26em] text-xred">Contacto</p>
+            <h2 class="mt-3 font-display text-5xl font-black uppercase italic md:text-7xl">Dinos qué moto tienes.</h2>
+            <p class="mt-5 max-w-xl text-white/55">
+              En Impact Garage te ayudamos a identificar el slider X Impact compatible y las opciones disponibles para tu modelo.
+            </p>
+            <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20mi%20moto%20es:%20"
+               target="_blank"
+               class="mt-7 inline-flex items-center gap-3 rounded-full bg-xred px-7 py-3.5 font-bold shadow-redglow transition hover:-translate-y-0.5 hover:bg-red-500">
+              WhatsApp · 436 256 2768 <span>→</span>
+            </a>
+          </div>
+
+          
+        </div>
+      </div>
+    </section>
+</main>
+
+
+
+<a class="wa-float"
+   href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20quiero%20información%20sobre%20sus%20sliders"
+   target="_blank"
+   rel="noopener"
+   aria-label="Contactar a Impact Garage por WhatsApp">
+  <svg width="25" height="25" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+    <path d="M19.11 17.47c-.28-.14-1.66-.82-1.92-.91-.26-.1-.45-.14-.64.14-.19.28-.73.91-.9 1.1-.16.19-.33.21-.61.07-.28-.14-1.18-.43-2.24-1.38-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.64-1.54-.88-2.11-.23-.56-.47-.48-.64-.49h-.55c-.19 0-.49.07-.75.35-.26.28-.99.96-.99 2.35 0 1.38 1.01 2.72 1.15 2.91.14.19 1.98 3.02 4.8 4.24.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.66-.68 1.9-1.33.23-.65.23-1.21.16-1.33-.07-.12-.26-.19-.54-.33z"/>
+    <path d="M16.03 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3.12 29l6.77-1.78A12.75 12.75 0 0 0 16.03 28.8h.01c7.05 0 12.79-5.74 12.79-12.8S23.09 3.2 16.03 3.2zm0 23.44h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-4.02 1.05 1.07-3.92-.25-.4A10.59 10.59 0 0 1 5.39 16c0-5.87 4.78-10.65 10.65-10.65S26.68 10.13 26.68 16s-4.78 10.64-10.65 10.64z"/>
+  </svg>
+  <span class="wa-float-label">WhatsApp</span>
+</a>
+
+<!-- VISTA DE PRODUCTO / INSTALACIÓN -->
+<div id="productModal" class="modal-backdrop fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="relative max-h-[92vh] w-full max-w-6xl overflow-y-auto rounded-[2rem] border border-white/10 bg-[#0B0B0B] shadow-2xl">
+    <button id="closeProductModal" type="button" class="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-black/75 text-white transition hover:bg-xred" aria-label="Cerrar">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M6 6l12 12M18 6 6 18"/>
+      </svg>
+    </button>
+
+    <div class="grid lg:grid-cols-[1.25fr_.75fr]">
+      <div class="min-h-[380px] bg-black p-4 md:p-7">
+        <div id="installedPhotoWrap" class="h-full">
+          <img id="installedPhoto" src="" alt="" class="mx-auto max-h-[72vh] w-full rounded-2xl object-contain">
+        </div>
+
+        <div id="noInstalledPhoto" class="hidden min-h-[420px] items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white/[.025] p-8 text-center">
+          <div class="max-w-md">
+            <div class="mx-auto grid h-16 w-16 place-items-center rounded-full border border-white/10 bg-white/5 text-xred">
+              <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 16l4-4 4 4 3-3 5 5M5 5h14v14H5z"/>
+              </svg>
+            </div>
+            <h3 class="mt-5 font-display text-3xl font-black uppercase">Vista instalada próximamente</h3>
+            <p class="mt-3 text-sm leading-6 text-white/50">El catálogo actual no incluye una fotografía de este modelo con el slider instalado. Se muestra únicamente material real disponible de X Impact.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="flex flex-col justify-center border-t border-white/10 p-7 lg:border-l lg:border-t-0 md:p-10">
+        <p id="modalBrand" class="text-xs font-black uppercase tracking-[.25em] text-xred"></p>
+        <h2 id="modalTitle" class="mt-2 font-display text-5xl font-black uppercase italic leading-none"></h2>
+        <p id="modalType" class="mt-4 text-sm font-bold uppercase tracking-[.16em] text-white/45"></p>
+        <div class="mt-6">
+          <span id="modalPrice" class="font-display text-5xl font-black"></span>
+          <span class="ml-2 text-xs font-bold uppercase tracking-[.14em] text-white/35">MXN</span>
+          <p class="mt-1 text-xs text-white/35">Precio especial Impact Garage</p>
+          <div class="mt-5 space-y-2 text-sm text-white/50">
+            <p>🚚 Envío y tiempo de entrega se confirman al cotizar.</p>
+            <p>📦 Producto sujeto a disponibilidad.</p>
+            <p>🏍️ Confirma modelo y año de tu moto antes de comprar.</p>
+          </div>
+        </div>
+        <p id="modalCaption" class="mt-6 leading-7 text-white/55"></p>
+
+        <div class="mt-8 flex flex-col gap-3">
+          <a id="modalWhatsapp" href="#" target="_blank" class="inline-flex items-center justify-center gap-3 rounded-full bg-xred px-6 py-3.5 font-bold shadow-redglow transition hover:bg-red-500">
+            Consultar disponibilidad <span>→</span>
+          </a>
+          <button id="modalBackBtn" type="button" class="rounded-full border border-white/12 px-6 py-3.5 font-semibold text-white/70 transition hover:bg-white/5 hover:text-white">
+            Seguir viendo modelos
+          </button>
+        </div>
+
+        <p class="mt-6 text-xs leading-5 text-white/30">Las fotografías de instalación provienen del catálogo oficial proporcionado de X Impact.</p>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<footer class="border-t border-white/5 bg-black py-8">
+  <div class="mx-auto flex max-w-7xl flex-col gap-4 px-5 text-sm text-white/35 sm:flex-row sm:items-center sm:justify-between md:px-8">
+    <p>© <span id="year"></span> Impact Garage. Todos los derechos reservados.</p>
+    <p>Distribuidor de sliders X Impact · Protección para motocicleta.</p>
+  </div>
+</footer>
+
+<script>
+const products = [
+  {brand:'Italika', model:'FT200', type:'Slider jaula “X”', image:'assets/product_01.png', installed:'assets/installed_01.jpg', price:1144, mlPrice:1271},
+  {brand:'Italika', model:'FT200', type:'Slider jaula', image:'assets/product_02.png', installed:'assets/installed_02.jpg', price:1111, mlPrice:1234},
+  {brand:'Italika', model:'125Z', type:'Slider', image:'assets/product_03.png', installed:'assets/installed_03.jpg', price:885, mlPrice:983},
+  {brand:'Italika', model:'250Z 2025', type:'Slider reforzado', image:'assets/product_04.png', installed:'assets/installed_04.jpg', price:1214, mlPrice:1349},
+  {brand:'Italika', model:'250Z', type:'Slider jaula', image:'assets/product_05.png', installed:'assets/installed_05.jpg', price:1259, mlPrice:1399},
+  {brand:'Italika', model:'250Z', type:'Slider colín', image:'assets/product_06.png', installed:'assets/installed_06.jpg', price:404, mlPrice:449},
+  {brand:'Italika', model:'250Z', type:'Slider · Colección rojo sangre', image:'assets/product_07.png', installed:'assets/installed_07.jpg', price:404, mlPrice:449},
+  {brand:'Italika', model:'250Z', type:'Slider jaula · Rojo sangre', image:'assets/product_08.png', installed:'assets/installed_08.jpg', price:1427, mlPrice:1586},
+  {brand:'Italika', model:'RT200', type:'Slider', image:'assets/product_09.png', installed:'', price:2302, mlPrice:2558},
+  {brand:'Italika', model:'250Z modelos antiguos', type:'Slider', image:'assets/product_10.png', installed:'', price:795, mlPrice:883},
+  {brand:'Italika', model:'250Z 2025', type:'Slider', image:'assets/product_11.png', installed:'assets/installed_11.jpg', price:751, mlPrice:834},
+  {brand:'Italika', model:'250Z 2020', type:'Slider', image:'assets/product_12.png', installed:'', price:1012, mlPrice:1124},
+  {brand:'Italika', model:'FT150 TS', type:'Slider', image:'assets/product_13.png', installed:'', price:751, mlPrice:834},
+  {brand:'Italika', model:'150Z', type:'Slider', image:'assets/product_14.png', installed:'', price:801, mlPrice:890},
+  {brand:'Italika', model:'DM200', type:'Slider', image:'assets/product_15.png', installed:'', price:890, mlPrice:989},
+  {brand:'Italika', model:'Vort-X 200', type:'Slider', image:'assets/product_16.png', installed:'', price:769, mlPrice:854},
+  {brand:'Italika', model:'Vort-X 300', type:'Slider', image:'assets/product_17.png', installed:'', price:989, mlPrice:1099},
+  {brand:'Italika', model:'200Z', type:'Slider', image:'assets/product_18.png', installed:'', price:971, mlPrice:1079},
+  {brand:'Honda', model:'XR190', type:'Slider jaula · Negro', image:'assets/product_19.png', installed:'assets/installed_19.jpg', price:850, mlPrice:944},
+  {brand:'Honda', model:'XR190', type:'Slider jaula · Rojo', image:'assets/product_20.png', installed:'assets/installed_20.jpg', price:1136, mlPrice:1262},
+  {brand:'Honda', model:'CB190', type:'Slider', image:'assets/product_21.png', installed:'', price:1187, mlPrice:1319},
+  {brand:'Honda', model:'XR190', type:'Slider', image:'assets/product_22.png', installed:'', price:899, mlPrice:999},
+  {brand:'Honda', model:'CB1', type:'Slider', image:'assets/product_23.png', installed:'', price:884, mlPrice:982},
+  {brand:'Honda', model:'XRE300', type:'Slider', image:'assets/product_24.png', installed:'', price:899, mlPrice:999},
+  {brand:'KTM', model:'Duke 390', type:'Slider', image:'assets/product_25.png', installed:'assets/installed_25.jpg', price:971, mlPrice:1079},
+  {brand:'KTM', model:'Duke 390', type:'Slider jaula', image:'assets/product_26.png', installed:'assets/installed_26.jpg', price:1606, mlPrice:1784},
+  {brand:'KTM', model:'Duke 250', type:'Slider', image:'assets/product_27.png', installed:'assets/installed_27.jpg', price:2497, mlPrice:2774},
+  {brand:'Universal', model:'Recto', type:'Slider universal', image:'assets/product_28.png', installed:'assets/installed_28.jpg', price:404, mlPrice:449},
+  {brand:'Universal', model:'Defensa', type:'Slider universal', image:'assets/product_29.png', installed:'assets/installed_29.jpg', price:1195, mlPrice:1328},
+  {brand:'Universal', model:'4 conos', type:'Slider universal', image:'assets/product_30.png', installed:'assets/installed_30.jpg', price:218, mlPrice:242},
+  {brand:'Bajaj', model:'Pulsar N250 / N160', type:'Slider', image:'assets/product_31.png', installed:'', price:307, mlPrice:341},
+  {brand:'Bajaj', model:'Dominar 400', type:'Slider', image:'assets/product_32.png', installed:'', price:890, mlPrice:989},
+  {brand:'Bajaj', model:'Pulsar 200NS', type:'Slider', image:'assets/product_33.png', installed:'', price:815, mlPrice:906},
+  {brand:'Vento', model:'Cyclone 210', type:'Slider', image:'assets/product_34.png', installed:'', price:1012, mlPrice:1124},
+  {brand:'Vento', model:'Tornado', type:'Slider', image:'assets/product_35.png', installed:'', price:1079, mlPrice:1199},
+  {brand:'Vento', model:'Nitrox', type:'Slider', image:'assets/product_36.png', installed:'', price:971, mlPrice:1079},
+  {brand:'Suzuki', model:'Gixxer SF', type:'Slider', image:'assets/product_37.png', installed:'', price:890, mlPrice:989},
+  {brand:'Suzuki', model:'Gixxer Street Sport', type:'Slider', image:'assets/product_38.png', installed:'', price:971, mlPrice:1079},
+  {brand:'Yamaha', model:'FZ25', type:'Slider', image:'assets/product_39.png', installed:'', price:899, mlPrice:999},
+  {brand:'Yamaha', model:'R3', type:'Slider', image:'assets/product_40.png', installed:'', price:971, mlPrice:1079},
+];
+
+const grid = document.getElementById('productGrid');
+const filterButtons = [...document.querySelectorAll('.filter-btn')];
+
+function renderProducts(filter='all') {
+  const list = filter === 'all' ? products : products.filter(p => p.brand === filter);
+
+  grid.innerHTML = list.map((p, i) => `
+    <article class="product-card overflow-hidden rounded-3xl border border-white/10 bg-xpanel">
+      <button type="button"
+              class="product-image-btn relative block aspect-[4/3] w-full overflow-hidden bg-black text-left"
+              data-product-index="${products.indexOf(p)}"
+              aria-label="Ver ${p.brand} ${p.model} con el slider instalado">
+        <img src="${p.image}" alt="${p.type} para ${p.brand} ${p.model}"
+             class="h-full w-full object-contain p-5 transition duration-500 hover:scale-[1.04]"
+             loading="lazy">
+        <span class="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[.18em] text-white/70 backdrop-blur">
+          ${p.brand}
+        </span>
+        <span class="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/65 text-white/70 backdrop-blur transition hover:bg-xred hover:text-white" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5M11 8v6M8 11h6"></path>
+          </svg>
+        </span>
+      </button>
+      <div class="p-5">
+        <p class="text-xs font-extrabold uppercase tracking-[.2em] text-xred">${p.type}</p>
+        <h3 class="mt-2 font-display text-3xl font-black uppercase leading-none">${p.model}</h3>
+        <div class="mt-5 flex items-end gap-3">
+          <div class="font-display text-4xl font-black">$${p.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+          <div class="pb-1 text-xs font-semibold uppercase tracking-[.12em] text-white/35">MXN</div>
+        </div>
+        <p class="mt-1 text-xs text-white/35">Precio especial Impact Garage</p>
+        <div class="mt-4 rounded-2xl border border-white/8 bg-black/25 px-4 py-3 text-xs leading-5 text-white/45">
+          🏍️ Confirma <strong class="text-white/65">modelo y año</strong> antes de comprar.
+        </div>
+        <a target="_blank"
+           href="https://wa.me/524362562768?text=${encodeURIComponent(`Hola Impact Garage, quiero información del ${p.type} para ${p.brand} ${p.model}. Vi el precio de $${p.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})} MXN en la página.`)}"
+           class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-white/65 transition hover:text-white">
+           Consultar disponibilidad <span class="text-xred">→</span>
+        </a>
+      </div>
+    </article>
+  `).join('');
+}
+
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(btn.dataset.filter);
+  });
+});
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+
+const productModal = document.getElementById('productModal');
+const installedPhoto = document.getElementById('installedPhoto');
+const installedPhotoWrap = document.getElementById('installedPhotoWrap');
+const noInstalledPhoto = document.getElementById('noInstalledPhoto');
+const modalBrand = document.getElementById('modalBrand');
+const modalTitle = document.getElementById('modalTitle');
+const modalType = document.getElementById('modalType');
+const modalCaption = document.getElementById('modalCaption');
+const modalPrice = document.getElementById('modalPrice');
+const modalWhatsapp = document.getElementById('modalWhatsapp');
+
+function openProductView(product) {
+  modalBrand.textContent = product.brand;
+  modalTitle.textContent = product.model;
+  modalType.textContent = product.type;
+  modalPrice.textContent = `$${product.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+  modalCaption.textContent = product.installed
+    ? 'Así se ve esta protección instalada en la motocicleta, utilizando la fotografía correspondiente del catálogo X Impact.'
+    : 'Puedes consultar este modelo directamente por WhatsApp. En cuanto exista una fotografía de instalación en el catálogo, esta vista puede actualizarse sin cambiar la tarjeta del producto.';
+
+  if (product.installed) {
+    installedPhoto.src = product.installed;
+    installedPhoto.alt = `${product.type} instalado en ${product.brand} ${product.model}`;
+    installedPhotoWrap.classList.remove('hidden');
+    noInstalledPhoto.classList.add('hidden');
+    noInstalledPhoto.classList.remove('flex');
+  } else {
+    installedPhoto.src = '';
+    installedPhotoWrap.classList.add('hidden');
+    noInstalledPhoto.classList.remove('hidden');
+    noInstalledPhoto.classList.add('flex');
+  }
+
+  modalWhatsapp.href = `https://wa.me/524362562768?text=${encodeURIComponent(`Hola Impact Garage, quiero información del ${product.type} para ${product.brand} ${product.model}. Vi el precio de $${product.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})} MXN en la página.`)}`;
+  productModal.classList.add('modal-show');
+  document.body.classList.add('modal-open');
+}
+
+function closeProductView() {
+  productModal.classList.remove('modal-show');
+  document.body.classList.remove('modal-open');
+}
+
+grid.addEventListener('click', (event) => {
+  const button = event.target.closest('.product-image-btn');
+  if (!button) return;
+  const product = products[Number(button.dataset.productIndex)];
+  if (product) openProductView(product);
+});
+
+document.getElementById('closeProductModal').addEventListener('click', closeProductView);
+document.getElementById('modalBackBtn').addEventListener('click', closeProductView);
+productModal.addEventListener('click', (event) => {
+  if (event.target === productModal) closeProductView();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && productModal.classList.contains('modal-show')) closeProductView();
+});
+
+
+document.getElementById('year').textContent = new Date().getFullYear();
+renderProducts();
+</script>
+
+</body>
+</html>
