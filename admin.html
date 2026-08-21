@@ -1,0 +1,613 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel | Impact Garage</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #070707;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid #222;
+      padding: 22px;
+      background: #090909;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 25px;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -1px;
+    }
+
+    .brand span {
+      color: #ff1515;
+    }
+
+    .subtitle {
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-top: 5px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 45px 20px;
+    }
+
+    .login {
+      max-width: 430px;
+      margin: 60px auto;
+      background: #111;
+      border: 1px solid #272727;
+      border-radius: 22px;
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: #888;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      color: #aaa;
+      font-size: 13px;
+      margin: 22px 0 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      background: #080808;
+      color: white;
+      outline: none;
+      font-size: 16px;
+    }
+
+    input:focus {
+      border-color: #ff1b1b;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .login-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #ff1515;
+      color: white;
+      font-size: 15px;
+    }
+
+    .login-btn:hover {
+      background: #d90000;
+    }
+
+    #panel {
+      display: none;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+
+    .logout {
+      background: #171717;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 11px 16px;
+    }
+
+    .status-info {
+      background: #101010;
+      border: 1px solid #252525;
+      border-radius: 16px;
+      padding: 17px;
+      margin-bottom: 25px;
+      color: #999;
+      line-height: 1.5;
+    }
+
+    .products {
+      display: grid;
+      gap: 13px;
+    }
+
+    .product {
+      background: #111;
+      border: 1px solid #242424;
+      border-radius: 16px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .product-name {
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .category {
+      color: #ff2424;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    select {
+      width: 100%;
+      background: #080808;
+      color: white;
+      border: 1px solid #333;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: bold;
+      outline: none;
+    }
+
+    select:focus {
+      border-color: #ff1b1b;
+    }
+
+    .available {
+      color: #21d375;
+    }
+
+    .soldout {
+      color: #ff3b3b;
+    }
+
+    .hidden {
+      color: #999;
+    }
+
+    #message {
+      margin-top: 18px;
+      min-height: 20px;
+      font-size: 14px;
+    }
+
+    .success {
+      color: #21d375;
+    }
+
+    .error {
+      color: #ff4545;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      background: #111;
+      border-radius: 15px;
+    }
+
+    @media (max-width: 650px) {
+      .product {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-head {
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="brand">
+        IMPACT <span>GARAGE</span>
+      </div>
+
+      <div class="subtitle">
+        PANEL DE ADMINISTRACIÓN
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="loginBox" class="login">
+
+    <h1>Acceso privado</h1>
+
+    <p class="muted">
+      Administra la disponibilidad de los productos de Impact Garage.
+    </p>
+
+    <form id="loginForm">
+
+      <label>Usuario</label>
+      <input
+        id="username"
+        type="text"
+        autocomplete="username"
+        required
+      >
+
+      <label>Contraseña</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button class="login-btn" type="submit">
+        ENTRAR AL PANEL
+      </button>
+
+    </form>
+
+    <div id="loginMessage"></div>
+
+  </section>
+
+
+  <section id="panel">
+
+    <div class="panel-head">
+
+      <div>
+        <h1>Disponibilidad</h1>
+
+        <p class="muted">
+          Control de inventario de Impact Garage
+        </p>
+      </div>
+
+      <button class="logout" id="logoutBtn">
+        Cerrar sesión
+      </button>
+
+    </div>
+
+
+    <div class="status-info">
+      Los cambios se guardan en la base de datos.
+      Selecciona el nuevo estado del producto y se actualizará automáticamente.
+    </div>
+
+
+    <div id="products" class="products"></div>
+
+    <div id="message"></div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+const loginBox = document.getElementById("loginBox");
+const panel = document.getElementById("panel");
+const productsBox = document.getElementById("products");
+const message = document.getElementById("message");
+const loginMessage = document.getElementById("loginMessage");
+
+
+function showMessage(text, error = false) {
+
+  message.textContent = text;
+
+  message.className = error
+    ? "error"
+    : "success";
+
+}
+
+
+async function request(body) {
+
+  const response = await fetch("/api/admin", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    credentials: "same-origin",
+
+    body: JSON.stringify(body)
+
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.error || "Ocurrió un error."
+    );
+  }
+
+  return data;
+
+}
+
+
+async function checkSession() {
+
+  try {
+
+    const response = await fetch(
+      "/api/admin",
+      {
+        credentials: "same-origin",
+        cache: "no-store"
+      }
+    );
+
+    if (!response.ok) {
+      showLogin();
+      return;
+    }
+
+    const data = await response.json();
+
+    showPanel();
+
+    renderProducts(data.items || []);
+
+  } catch (error) {
+
+    showLogin();
+
+  }
+
+}
+
+
+function showLogin() {
+
+  loginBox.style.display = "block";
+  panel.style.display = "none";
+
+}
+
+
+function showPanel() {
+
+  loginBox.style.display = "none";
+  panel.style.display = "block";
+
+}
+
+
+function renderProducts(items) {
+
+  productsBox.innerHTML = "";
+
+  if (!items.length) {
+
+    productsBox.innerHTML = `
+      <div class="empty">
+        Todavía no hay productos registrados
+        en la base de datos.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  items.forEach(item => {
+
+    const row = document.createElement("div");
+
+    row.className = "product";
+
+    const info = document.createElement("div");
+
+    const category = document.createElement("div");
+    category.className = "category";
+    category.textContent = item.category;
+
+    const name = document.createElement("div");
+    name.className = "product-name";
+    name.textContent = item.label;
+
+    info.appendChild(category);
+    info.appendChild(name);
+
+
+    const select = document.createElement("select");
+
+    select.innerHTML = `
+      <option value="available">
+        🟢 Disponible
+      </option>
+
+      <option value="soldout">
+        🔴 Agotado
+      </option>
+
+      <option value="hidden">
+        ⚫ Oculto
+      </option>
+    `;
+
+    select.value = item.status || "available";
+
+
+    select.addEventListener(
+      "change",
+      async () => {
+
+        const previous = item.status;
+
+        select.disabled = true;
+
+        showMessage("Guardando cambio...");
+
+        try {
+
+          await request({
+
+            action: "update",
+
+            productKey: item.product_key,
+
+            label: item.label,
+
+            category: item.category,
+
+            status: select.value
+
+          });
+
+          item.status = select.value;
+
+          showMessage(
+            "✓ Disponibilidad actualizada correctamente."
+          );
+
+        } catch (error) {
+
+          select.value = previous;
+
+          showMessage(
+            error.message,
+            true
+          );
+
+        } finally {
+
+          select.disabled = false;
+
+        }
+
+      }
+    );
+
+
+    row.appendChild(info);
+    row.appendChild(select);
+
+    productsBox.appendChild(row);
+
+  });
+
+}
+
+
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      loginMessage.textContent =
+        "Verificando...";
+
+      loginMessage.className = "";
+
+      try {
+
+        await request({
+
+          action: "login",
+
+          username:
+            document.getElementById("username").value,
+
+          password:
+            document.getElementById("password").value
+
+        });
+
+        document.getElementById("password").value = "";
+
+        loginMessage.textContent = "";
+
+        await checkSession();
+
+      } catch (error) {
+
+        loginMessage.textContent =
+          error.message;
+
+        loginMessage.className =
+          "error";
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    async () => {
+
+      try {
+
+        await request({
+          action: "logout"
+        });
+
+      } catch {}
+
+      showLogin();
+
+    }
+  );
