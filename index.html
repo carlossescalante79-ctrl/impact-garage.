@@ -2047,6 +2047,213 @@ document.addEventListener('keydown', (event) => {
 document.getElementById('year').textContent = new Date().getFullYear();
 renderProducts();
 renderAccessories();
+  // ========================================
+// DISPONIBILIDAD DESDE NEON
+// ========================================
+
+const accessoryKeyMap = {
+  'Kit diablo para casco': 'accessory_diablo',
+  'Alas para casco': 'accessory_alas',
+  'Trenzas para casco': 'accessory_trenzas',
+  'Llaveros bordados': 'accessory_llaveros',
+  'Sombrilla para celular': 'accessory_sombrilla',
+  'Orejas para casco': 'accessory_orejas',
+  'Pollo': 'accessory_pollo',
+  'Dúo Títere': 'accessory_duo_titere',
+  'Dúo Infierno': 'accessory_duo_infierno',
+  'Conejo peludo': 'accessory_conejo',
+  'Dúo Ohana': 'accessory_duo_ohana',
+  'Dúo Peach': 'accessory_duo_peach'
+};
+
+async function applyAvailability() {
+  try {
+    const response = await fetch('/api/availability', {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      console.warn('No se pudo cargar disponibilidad');
+      return;
+    }
+
+    const data = await response.json();
+
+    const statusMap = {};
+
+    (data.items || []).forEach(item => {
+      statusMap[item.product_key] = item.status;
+    });
+
+    // -----------------------------
+    // SLIDERS
+    // product_01 hasta product_40
+    // -----------------------------
+    const productCards = [
+      ...document.querySelectorAll(
+        '#productGrid .product-card'
+      )
+    ];
+
+    productCards.forEach((card, index) => {
+      const productKey =
+        `product_${String(index + 1).padStart(2, '0')}`;
+
+      const status =
+        statusMap[productKey] || 'available';
+
+      if (status === 'hidden') {
+        card.style.display = 'none';
+        return;
+      }
+
+      card.style.display = '';
+
+      const content =
+        card.querySelector('.p-5');
+
+      const oldBadge =
+        card.querySelector('.availability-badge');
+
+      if (oldBadge) {
+        oldBadge.remove();
+      }
+
+      if (status === 'soldout') {
+        card.style.opacity = '0.65';
+
+        if (content) {
+          const badge =
+            document.createElement('div');
+
+          badge.className =
+            'availability-badge mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-xs font-black uppercase tracking-[.18em] text-red-400';
+
+          badge.textContent = 'AGOTADO';
+
+          content.appendChild(badge);
+        }
+
+        const whatsapp =
+          card.querySelector(
+            'a[href*="wa.me"]'
+          );
+
+        if (whatsapp) {
+          whatsapp.style.pointerEvents =
+            'none';
+
+          whatsapp.style.opacity = '0.35';
+
+          whatsapp.innerHTML =
+            'Agotado temporalmente';
+        }
+
+      } else {
+        card.style.opacity = '1';
+      }
+    });
+
+
+    // -----------------------------
+    // ACCESORIOS
+    // -----------------------------
+    const accessoryCards = [
+      ...document.querySelectorAll(
+        '#accessoryGrid .accessory-card'
+      )
+    ];
+
+    accessoryCards.forEach(card => {
+      const title =
+        card.querySelector('h3');
+
+      if (!title) return;
+
+      const name =
+        title.textContent.trim();
+
+      const productKey =
+        accessoryKeyMap[name];
+
+      if (!productKey) return;
+
+      const status =
+        statusMap[productKey] || 'available';
+
+      if (status === 'hidden') {
+        card.style.display = 'none';
+        return;
+      }
+
+      card.style.display = '';
+
+      const oldBadge =
+        card.querySelector(
+          '.availability-badge'
+        );
+
+      if (oldBadge) {
+        oldBadge.remove();
+      }
+
+      if (status === 'soldout') {
+        card.style.opacity = '0.65';
+
+        const content =
+          card.querySelector('.p-5');
+
+        if (content) {
+          const badge =
+            document.createElement('div');
+
+          badge.className =
+            'availability-badge mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-xs font-black uppercase tracking-[.18em] text-red-400';
+
+          badge.textContent = 'AGOTADO';
+
+          content.appendChild(badge);
+        }
+
+        const whatsapp =
+          card.querySelector(
+            'a[href*="wa.me"]'
+          );
+
+        if (whatsapp) {
+          whatsapp.style.pointerEvents =
+            'none';
+
+          whatsapp.style.opacity = '0.35';
+
+          whatsapp.innerHTML =
+            'Agotado temporalmente';
+        }
+
+      } else {
+        card.style.opacity = '1';
+      }
+    });
+
+  } catch (error) {
+    console.warn(
+      'Error consultando disponibilidad:',
+      error
+    );
+  }
+}
+
+
+// Esperamos a que accesorios estén renderizados
+window.addEventListener(
+  'load',
+  () => {
+    setTimeout(
+      applyAvailability,
+      150
+    );
+  }
+);
 </script>
 
 
