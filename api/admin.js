@@ -140,6 +140,21 @@ export default async function handler(req, res) {
 
       const db = sql();
 
+      await db`
+        INSERT INTO product_availability (
+          product_key,
+          label,
+          category,
+          status
+        ) VALUES (
+          'product_41',
+          'American Piston California R300',
+          'Sliders',
+          'available'
+        )
+        ON CONFLICT (product_key) DO NOTHING
+      `;
+
       const items = await db`
         SELECT
           product_key,

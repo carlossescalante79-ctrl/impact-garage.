@@ -95,7 +95,14 @@
       transform:scale(1.07);
     }
     .accessory-card:hover .accessory-image-stage img { transform:scale(1.035); }
-    #catalogo, #accesorios { scroll-margin-top:78px; }
+    #novedad, #catalogo, #accesorios { scroll-margin-top:78px; }
+
+    .new-product-glow {
+      box-shadow: 0 0 80px rgba(241,15,22,.16);
+    }
+    .new-product-video {
+      background: linear-gradient(145deg,#1a1a1a 0%,#070707 100%);
+    }
 
     .product-image-btn { cursor: zoom-in; }
     .product-image-btn:focus-visible { outline: 2px solid #F10F16; outline-offset: 3px; }
@@ -161,6 +168,7 @@
 
     <div class="hidden items-center gap-8 md:flex">
       <a href="#inicio" class="nav-link text-sm font-semibold text-white/75 hover:text-white">Inicio</a>
+      <a href="#novedad" class="nav-link text-sm font-bold text-xred hover:text-white">Novedad</a>
       <div class="catalog-menu">
         <button type="button" class="catalog-trigger nav-link text-sm font-semibold text-white/75 hover:text-white" aria-haspopup="true">
           Catálogo
@@ -192,6 +200,7 @@
   <div id="mobileMenu" class="mobile-menu border-t border-white/5 bg-black/95 px-5 md:hidden">
     <div class="flex flex-col py-4">
       <a class="rounded-lg px-4 py-3 text-white/75 hover:bg-white/5" href="#inicio">Inicio</a>
+      <a class="rounded-lg bg-xred/10 px-4 py-3 font-bold text-xred hover:bg-xred hover:text-white" href="#novedad">Novedad</a>
       <div class="px-4 pb-1 pt-3 text-xs font-black uppercase tracking-[.18em] text-white/35">Catálogo</div>
       <a class="rounded-lg px-7 py-3 text-white/75 hover:bg-white/5" href="#catalogo">Sliders</a>
       <a class="rounded-lg px-7 py-3 text-white/75 hover:bg-white/5" href="#accesorios">Accesorios</a>
@@ -214,7 +223,7 @@
     <div class="relative z-10 mx-auto flex min-h-[680px] max-w-7xl items-center px-5 py-16 md:px-8">
       <div class="max-w-3xl">
         <div class="mb-6 flex items-center gap-3">
-          <span class="slash bg-xred px-4 py-1.5 text-xs font-extrabold uppercase tracking-[.24em]">Protección real</span>
+          <a href="#novedad" class="slash bg-xred px-4 py-1.5 text-xs font-extrabold uppercase tracking-[.24em] transition hover:bg-red-500">Nuevo · California R300</a>
           <span class="text-xs font-bold uppercase tracking-[.22em] text-white/50">Impact Garage · Distribuidor X Impact</span>
         </div>
 
@@ -233,8 +242,8 @@
         </div>
 
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#catalogo" class="inline-flex items-center gap-3 rounded-full bg-xred px-7 py-3.5 font-bold shadow-redglow transition hover:-translate-y-0.5 hover:bg-red-500">
-            Ver modelos <span>→</span>
+          <a href="#novedad" class="inline-flex items-center gap-3 rounded-full bg-xred px-7 py-3.5 font-bold shadow-redglow transition hover:-translate-y-0.5 hover:bg-red-500">
+            Ver nuevo slider <span>→</span>
           </a>
           <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20quiero%20saber%20qué%20slider%20le%20queda%20a%20mi%20moto" target="_blank" class="inline-flex items-center rounded-full border border-white/20 bg-black/30 px-7 py-3.5 font-semibold backdrop-blur transition hover:border-white/40 hover:bg-white/10">
             Preguntar por mi moto
@@ -254,6 +263,57 @@
             <div class="font-display text-3xl font-black text-xred">A36</div>
             <div class="mt-1 text-xs text-white/45">placa estructural</div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOVEDAD: AMERICAN PISTON CALIFORNIA R300 -->
+  <section id="novedad" class="relative overflow-hidden border-y border-xred/20 bg-[#080808] py-20">
+    <div class="pointer-events-none absolute -right-24 top-0 h-96 w-96 rounded-full bg-xred opacity-30 blur-3xl"></div>
+    <div class="relative mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-[.75fr_1.25fr] lg:items-center">
+      <div class="new-product-video new-product-glow mx-auto w-full max-w-md overflow-hidden rounded-[2rem] border border-white/15 p-3">
+        <video class="aspect-[9/16] w-full rounded-2xl bg-black object-cover"
+               controls playsinline preload="metadata"
+               poster="assets/american_piston_california_r300.jpg"
+               aria-label="Video del slider instalado en una American Piston California R300">
+          <source src="assets/american_piston_california_r300.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+      </div>
+
+      <div>
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-xred/20 bg-xred/10 px-4 py-2 text-xs font-black uppercase tracking-[.22em] text-xred">
+          <span class="h-2 w-2 rounded-full bg-xred"></span>
+          Nuevo producto
+        </div>
+        <p class="text-xs font-black uppercase tracking-[.25em] text-white/45">American Piston</p>
+        <h2 class="mt-3 font-display text-5xl font-black uppercase italic leading-none md:text-7xl">
+          Slider para<br><span class="text-xred">California R300</span>
+        </h2>
+        <p class="mt-6 max-w-2xl text-base leading-7 text-white/60 md:text-lg">
+          Protección tubular diseñada para acompañar las líneas deportivas de tu motocicleta y ayudar a proteger sus costados ante caídas e impactos.
+        </p>
+
+        <div class="mt-8 rounded-3xl border border-white/10 bg-white/[.035] p-6 md:p-8">
+          <p class="text-xs font-bold uppercase tracking-[.18em] text-white/40">Precio especial de lanzamiento</p>
+          <div class="mt-2 flex flex-wrap items-end gap-3">
+            <span class="font-display text-6xl font-black">$2,200.00</span>
+            <span class="pb-2 text-sm font-bold uppercase tracking-[.14em] text-white/35">MXN</span>
+          </div>
+          <p class="mt-3 text-base font-bold text-white">🚚 Envío incluido</p>
+          <p class="mt-1 text-sm text-white/45">(No aplica para zona extendida)</p>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="https://wa.me/524362562768?text=Hola%20Impact%20Garage,%20quiero%20el%20nuevo%20slider%20para%20American%20Piston%20California%20R300%20de%20%242%2C200%20con%20env%C3%ADo%20incluido."
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-3 rounded-full bg-xred px-7 py-3.5 font-bold shadow-redglow transition hover:-translate-y-0.5 hover:bg-red-500">
+            Quiero el nuevo slider <span>→</span>
+          </a>
+          <a href="#catalogo" class="inline-flex items-center rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white/70 transition hover:bg-white/5 hover:text-white">
+            Ver catálogo completo
+          </a>
         </div>
       </div>
     </div>
@@ -326,6 +386,7 @@
         <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Vento">Vento</button>
         <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Suzuki">Suzuki</button>
         <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Yamaha">Yamaha</button>
+        <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="American Piston">American Piston</button>
         <button class="filter-btn rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-white/70 transition" data-filter="Universal">Universales</button>
       </div>
 
@@ -1795,7 +1856,7 @@
           <span id="modalPrice" class="font-display text-5xl font-black"></span>
           <span class="ml-2 text-xs font-bold uppercase tracking-[.14em] text-white/35">MXN</span>
           <p class="mt-1 text-xs text-white/35">Precio especial Impact Garage</p>
-          <div class="mt-5 space-y-2 text-sm text-white/50">
+          <div id="modalPurchaseNotes" class="mt-5 space-y-2 text-sm text-white/50">
             <p>🚚 Envío y tiempo de entrega se confirman al cotizar.</p>
             <p>📦 Producto sujeto a disponibilidad.</p>
             <p>🏍️ Confirma modelo y año de tu moto antes de comprar.</p>
@@ -1867,6 +1928,7 @@ const products = [
   {brand:'Suzuki', model:'Gixxer Street Sport', type:'Slider', image:'assets/product_38.png', installed:'', price:971, mlPrice:1079},
   {brand:'Yamaha', model:'FZ25', type:'Slider', image:'assets/product_39.png', installed:'', price:899, mlPrice:999},
   {brand:'Yamaha', model:'R3', type:'Slider', image:'assets/product_40.png', installed:'', price:971, mlPrice:1079},
+  {brand:'American Piston', model:'California R300', type:'Nuevo slider', image:'assets/american_piston_california_r300.jpg', installed:'assets/american_piston_california_r300.jpg', price:2200, mlPrice:2200, featured:true, shippingIncluded:true},
 ];
 
 const liveAssetBase = 'https://impact-garage.vercel.app/';
@@ -1985,7 +2047,9 @@ function renderAccessories() {
 
 function renderProducts(filter='all') {
   const baseList = filter === 'all' ? products : products.filter(p => p.brand === filter);
-  const list = baseList.filter(p => availabilityStatus(productAvailabilityKey(p)) !== 'hidden');
+  const list = baseList
+    .filter(p => availabilityStatus(productAvailabilityKey(p)) !== 'hidden')
+    .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 
   grid.innerHTML = list.map(p => {
     const status = availabilityStatus(productAvailabilityKey(p));
@@ -1998,8 +2062,8 @@ function renderProducts(filter='all') {
         <img src="${p.image}" alt="${p.type} para ${p.brand} ${p.model}"
              class="h-full w-full object-contain p-5 transition duration-500 hover:scale-[1.04]"
              loading="lazy">
-        <span class="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[.18em] text-white/70 backdrop-blur">
-          ${p.brand}
+        <span class="absolute left-4 top-4 rounded-full ${p.featured ? 'bg-xred text-white' : 'bg-black/70 text-white/70'} px-3 py-1 text-[11px] font-extrabold uppercase tracking-[.18em] backdrop-blur">
+          ${p.featured ? 'Nuevo · ' : ''}${p.brand}
         </span>
         ${status === 'soldout' ? '<span class="absolute right-4 top-4 rounded-full bg-red-600 px-3 py-1 text-[11px] font-black uppercase tracking-[.14em] text-white">Agotado</span>' : `<span class="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/65 text-white/70 backdrop-blur transition hover:bg-xred hover:text-white" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5M11 8v6M8 11h6"></path></svg></span>`}
       </button>
@@ -2012,7 +2076,9 @@ function renderProducts(filter='all') {
         </div>
         <p class="mt-1 text-xs text-white/35">Precio especial Impact Garage</p>
         <div class="mt-4 rounded-2xl border border-white/8 bg-black/25 px-4 py-3 text-xs leading-5 text-white/45">
-          🏍️ Confirma <strong class="text-white/65">modelo y año</strong> antes de comprar.
+          ${p.shippingIncluded
+            ? '🚚 <strong class="text-white/65">Envío incluido</strong><br><span class="text-white/35">(No aplica para zona extendida)</span>'
+            : '🏍️ Confirma <strong class="text-white/65">modelo y año</strong> antes de comprar.'}
         </div>
         ${status === 'soldout'
           ? '<div class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-red-400">Agotado temporalmente</div>'
@@ -2050,12 +2116,16 @@ const modalType = document.getElementById('modalType');
 const modalCaption = document.getElementById('modalCaption');
 const modalPrice = document.getElementById('modalPrice');
 const modalWhatsapp = document.getElementById('modalWhatsapp');
+const modalPurchaseNotes = document.getElementById('modalPurchaseNotes');
 
 function openProductView(product) {
   modalBrand.textContent = product.brand;
   modalTitle.textContent = product.model;
   modalType.textContent = product.type;
   modalPrice.textContent = `$${product.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+  modalPurchaseNotes.innerHTML = product.shippingIncluded
+    ? '<p>🚚 Envío incluido.</p><p class="text-white/35">(No aplica para zona extendida)</p><p>📦 Producto sujeto a disponibilidad.</p>'
+    : '<p>🚚 Envío y tiempo de entrega se confirman al cotizar.</p><p>📦 Producto sujeto a disponibilidad.</p><p>🏍️ Confirma modelo y año de tu moto antes de comprar.</p>';
   modalCaption.textContent = product.installed
     ? 'Así se ve esta protección instalada en la motocicleta, utilizando la fotografía correspondiente del catálogo X Impact.'
     : 'Puedes consultar este modelo directamente por WhatsApp. En cuanto exista una fotografía de instalación en el catálogo, esta vista puede actualizarse sin cambiar la tarjeta del producto.';
@@ -2073,7 +2143,8 @@ function openProductView(product) {
     noInstalledPhoto.classList.add('flex');
   }
 
-  modalWhatsapp.href = `https://wa.me/524362562768?text=${encodeURIComponent(`Hola Impact Garage, quiero información del ${product.type} para ${product.brand} ${product.model}. Vi el precio de $${product.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})} MXN en la página.`)}`;
+  const shippingText = product.shippingIncluded ? ' con envío incluido (no aplica para zona extendida)' : '';
+  modalWhatsapp.href = `https://wa.me/524362562768?text=${encodeURIComponent(`Hola Impact Garage, quiero información del ${product.type} para ${product.brand} ${product.model}. Vi el precio de $${product.price.toLocaleString('es-MX', {minimumFractionDigits: 2, maximumFractionDigits: 2})} MXN${shippingText} en la página.`)}`;
   productModal.classList.add('modal-show');
   document.body.classList.add('modal-open');
 }
