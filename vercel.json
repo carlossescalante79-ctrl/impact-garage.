@@ -1,8 +1,17 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/resena", "destination": "/resena.html" }
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/r/:code",
+      "destination": "/resena.html?code=:code"
+    }
   ]
 }
