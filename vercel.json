@@ -11,7 +11,7 @@
     },
     {
       "source": "/r/:code",
-      "destination": "/resena.html?code=:code"
+      "destination": "/resena?code=:code"
     }
   ]
 }
